@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from octofit_tracker.models import User, Team, Activity, Leaderboard, Workout
-from bson import ObjectId
 from datetime import timedelta
 
 class Command(BaseCommand):
@@ -22,7 +21,6 @@ class Command(BaseCommand):
             User(username='crashoverride', email='crashoverride@mhigh.edu', password='password4'),
             User(username='sleeptoken', email='sleeptoken@mhigh.edu', password='password5'),
         ]
-        # Save users individually before adding them to teams
         for user in users:
             user.save()
 
@@ -31,8 +29,8 @@ class Command(BaseCommand):
         team2 = Team(name='Gold Team')
         team1.save()
         team2.save()
-        team1.members.add(users[0], users[1])
-        team2.members.add(users[2], users[3], users[4])
+        team1.members.set([users[0], users[1]])  # Usar set() para ManyToManyField
+        team2.members.set([users[2], users[3], users[4]])
 
         # Create activities
         activities = [
