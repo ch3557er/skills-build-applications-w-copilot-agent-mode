@@ -81,7 +81,7 @@ WSGI_APPLICATION = "octofit_tracker.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Update database configuration to use MongoDB
+# Update database configuration to use djongo as the database engine
 DATABASES = {
     "default": {
         "ENGINE": "djongo",
